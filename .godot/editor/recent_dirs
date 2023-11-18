@@ -1,0 +1,9 @@
+res://scenes/player/states
+res://autoloaders
+res://scenes/Finish
+res://scenes/camera
+res://state_machine
+res://assets/sprites
+res://scenes/player
+res://resources/tile_sets
+res://scenes/world

@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://du4odkobpnc83"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_6ple5"]
+[ext_resource type="Texture2D" uid="uid://d2qddea6ty7sf" path="res://assets/sprites/tilemap_packed.png" id="1_lxp3u"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_clens"]
+[ext_resource type="Script" path="res://scenes/player/states/idle.gd" id="4_gksd8"]
+[ext_resource type="Script" path="res://scenes/player/states/ski.gd" id="5_5a6kj"]
+[ext_resource type="Script" path="res://scenes/player/states/jump.gd" id="6_2nal8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp0kw"]
+atlas = ExtResource("1_lxp3u")
+region = Rect2(160, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfsht"]
+atlas = ExtResource("1_lxp3u")
+region = Rect2(176, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuf3t"]
+atlas = ExtResource("1_lxp3u")
+region = Rect2(160, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u0ji"]
+atlas = ExtResource("1_lxp3u")
+region = Rect2(176, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7wiyx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lp0kw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfsht")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuf3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u0ji")
+}],
+"loop": true,
+"name": &"ski",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_glsin"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_6ple5")
+max_speed = 140.0
+move_speed = 50.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = -15.0
+offset_top = -34.0
+offset_right = 25.0
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 12
+text = "State"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_7wiyx")
+animation = &"ski"
+frame_progress = 0.992974
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_glsin")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_clens")
+initial_state = NodePath("Ski")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_gksd8")
+
+[node name="Ski" type="Node" parent="StateMachine"]
+script = ExtResource("5_5a6kj")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("6_2nal8")
