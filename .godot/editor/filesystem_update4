@@ -3,8 +3,8 @@ res://resources/tile_sets/default_tile_set.tres
 res://scenes/player/player.tscn
 res://scenes/camera/camera.tscn
 res://scenes/Finish/finish.tscn
-res://scenes/player/states/jump.gd
-res://scenes/player/states/ski.gd
-res://scenes/player/states/fall.gd
-res://scenes/player/states/idle.gd
+res://scenes/player/states/stop.gd
+res://scenes/ramp/ramp.tscn
+res://autoloaders/signal_bus.gd
 res://scenes/player/player.gd
+res://scenes/ramp/ramp.gd

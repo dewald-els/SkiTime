@@ -14,7 +14,11 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	SignalBus.connect("finish_crossed", on_finish_crossed)
+	SignalBus.connect("ramp_entered", on_ramp_entered)
 
 
 func on_finish_crossed() -> void:
 	state_machine.transition_to("Stop")
+
+func on_ramp_entered() -> void:
+	state_machine.transition_to("Jump")

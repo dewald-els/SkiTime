@@ -6,6 +6,9 @@ class_name StopState
 func enter(_msg: Dictionary = {}) -> void:
 	player.label.text = "Ski"
 	player.velocity.x = 0.0
+	player.scale = Vector2(1, 1)
+	player.shadow.transform.origin = Vector2(0, 0)
+	player.shadow.scale = Vector2(1, 1)
 
 func physics_update(delta: float) -> void:
 	player.velocity.y -= player.decceleration * delta
